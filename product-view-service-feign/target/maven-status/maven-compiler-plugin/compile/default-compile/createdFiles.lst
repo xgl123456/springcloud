@@ -1,0 +1,5 @@
+productview\service\ProductService.class
+productview\controller\ProductController.class
+productview\ProductViewApplication.class
+productview\client\FeignServiceClient.class
+productview\pojo\Product.class

@@ -1,0 +1,4 @@
+productdata\ProductDataApplication.class
+productdata\service\ProductService.class
+productdata\controller\ProductController.class
+productdata\pojo\Product.class
