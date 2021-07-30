@@ -47,5 +47,8 @@
     	<module>eureka-server</module>
     	<module>product-data-server</module>
     	<module>product-view-service-feign</module>
+    	<module>config-server</module>
+    	<module>hystrix-dashboard</module>
+    	<module>turbine</module>
     </modules>
 </project>

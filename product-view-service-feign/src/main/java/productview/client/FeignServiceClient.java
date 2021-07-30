@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import productview.pojo.Product;
 
 
-@FeignClient(value = "product-data-server")
+@FeignClient(value = "product-data-server",fallback = ProductClientFeignHystrix.class)
 public interface FeignServiceClient {
 	
 	@GetMapping("/products")

@@ -6,11 +6,15 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import brave.sampler.Sampler;
 import cn.hutool.core.convert.Convert;
@@ -21,9 +25,18 @@ import cn.hutool.core.util.NumberUtil;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+@ComponentScan(basePackages = "productview")
+@EnableCircuitBreaker
 public class ProductViewApplication {
 	public static void main(String[] args) {
-        int port = 0;
+        
+		//判断 rabiitMQ 是否启动
+        int rabbitMQPort = 5672;
+        if(NetUtil.isUsableLocalPort(rabbitMQPort)) {
+            System.err.printf("未在端口%d 发现 rabbitMQ服务，请检查rabbitMQ 是否启动", rabbitMQPort );
+            System.exit(1);
+        } 
+		int port = 0;
         int defaultPort = 8012;
         Future<Integer> future = ThreadUtil.execAsync(() ->{
                 int p = 0;
@@ -54,6 +67,7 @@ public class ProductViewApplication {
             System.exit(1);
         }
         new SpringApplicationBuilder(ProductViewApplication.class).properties("server.port=" + port).run(args);
+		//SpringApplication.run(ProductViewApplication.class, args);
      }
 	
 	@Bean
