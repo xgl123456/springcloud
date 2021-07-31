@@ -1,0 +1,9 @@
+server:
+  port: 8040
+spring:  application:    name: product-service-zuul
+zuul:  routes:    api-a:
+      path: /api-data/**
+      service-id: product-data-server
+    api-b:
+      path: /api-view/**
+      service-id: product-view-service-feign  

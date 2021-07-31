@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: XGL
+Build-Jdk: 16.0.1
+Implementation-Title: zuul
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: org.example.cloud
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/springcloud1/zuul
+Created-By: Maven Integration for Eclipse
+
